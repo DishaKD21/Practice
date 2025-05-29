@@ -3,7 +3,7 @@ const arr = [1,2,3,4,5,6,7];
 const sum=0;
 const found = arr.reduce((sum,elem)=>{
     return elem + sum;
-})
+},0)
 console.log(found);
 
 //total price
