@@ -2,7 +2,7 @@ function Add_Task(){
     return(
         <div className="container">
         <h2>Add New Task</h2>
-        <input type="text" />
+        <input type="text"/>
         <br />
         <select name="Select" id="">
          <option value="Personal">Personal</option>
