@@ -1,46 +1,43 @@
-import { useState } from "react";
-import All from "./All";
-import Pending from "./Pending";
-import Completed from "./Completed";
-import Work from "./Work";
-import Personal from "./Peronal";
+function Fields(props) {
+  function getFilterCounts() {
+    return {
+      all: props.tasks.length,
+      pending: props.tasks.filter(function (task) { 
+        return !task.completed; }).length,
 
-function Fields({ tasks }) {
-  const [page, setpage] = useState("All");
+      completed: props.tasks.filter(function (task) { 
+        return task.completed; }).length,
 
-  let CurrentComponent;
-  switch (page) {
-    case "All":
-      CurrentComponent = <All tasks={tasks} />;
-      break;
-    case "Pending":
-      CurrentComponent = <Pending />;
-      break;
-    case "Completed":
-      CurrentComponent = <Completed />;
-      break;
-    case "Work":
-      CurrentComponent = <Work />;
-      break;
-    case "Personal":
-      CurrentComponent = <Personal />;
-      break;
-    default:
-      CurrentComponent = <All tasks={tasks} />;
-  }
+      work: props.tasks.filter(function (task) { 
+        return task.category === 'Work'; }).length,
+
+      personal: props.tasks.filter(function (task) {
+         return task.category === 'Personal'; }).length
+    };
+}
+  const counts = getFilterCounts();
+
+  const filterButtons = [
+    { key: 'all', label: 'All', count: counts.all },
+    { key: 'pending', label: 'Pending', count: counts.pending },
+    { key: 'completed', label: 'Completed', count: counts.completed },
+    { key: 'work', label: 'Work', count: counts.work },
+    { key: 'personal', label: 'Personal', count: counts.personal }
+  ];
 
   return (
-    <div className="container">
-      <ul>
-        <li><button onClick={() => setpage("All")}>All</button></li>
-        <li><button onClick={() => setpage("Pending")}>Pending</button></li>
-        <li><button onClick={() => setpage("Completed")}>Completed</button></li>
-        <li><button onClick={() => setpage("Work")}>Work</button></li>
-        <li><button onClick={() => setpage("Personal")}>Personal</button></li>
-      </ul>
-      <div>{CurrentComponent}</div>
+    <div>
+      {filterButtons.map(function(button) {
+        return (
+          <button
+            key={button.key}
+            onClick={function () { props.onFilterChange(button.key); }}
+          >
+            {button.label} ({button.count})
+          </button>
+        );
+      })}
     </div>
   );
 }
-
 export default Fields;

@@ -1,40 +1,46 @@
-import { useState } from "react";
+import React, { useState } from 'react';
+import { Trash2, Plus } from 'lucide-react';
 
-function Add_Task({ onAddTask }) {
-  const [inputValue, setInputValue] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("Personal");
+// Component 1: Add New Task
+function Add_Task(props) {
+  const [taskTitle, setTaskTitle] = useState('');
+  const [category, setCategory] = useState('Personal');
 
-  const adding_Task = () => {
-    if (inputValue.trim()) {
-      onAddTask({
-        title: inputValue,
-        category: selectedCategory,
-        completed: false
+  function handleAddTask() {
+    if (taskTitle.trim()) {
+      props.onAddTask({
+        id: Date.now(),
+        title: taskTitle,
+        category: category,
+        completed: false,
+        createdAt: new Date()
       });
-      setInputValue("");
+      setTaskTitle('');
     }
-  };
+  }
 
   return (
-    <div className="container">
+    <div>
       <h2>Add New Task</h2>
-      <input
-        type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <br />
-      <select 
-        value={selectedCategory}
-        onChange={(e) => setSelectedCategory(e.target.value)}
-      >
-        <option value="Personal">Personal</option>
-        <option value="Work">Work</option>
-      </select>
-      <br />
-      <button onClick={adding_Task}>+ Add Task</button>
+      <div>
+        <input
+          type="text"
+          placeholder="Enter task title..."
+          value={taskTitle}
+          onChange={function (e) { setTaskTitle(e.target.value); }}
+        />
+        <select
+          value={category}
+          onChange={function (e) { setCategory(e.target.value); }}
+        >
+          <option value="Personal">Personal</option>
+          <option value="Work">Work</option>
+        </select>
+        <button onClick={handleAddTask}>
+          + Add Task
+        </button>
+      </div>
     </div>
   );
 }
-
 export default Add_Task;
