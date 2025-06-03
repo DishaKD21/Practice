@@ -1,21 +1,17 @@
 import { useState } from "react";
 import All from "./All";
-import Pending from "./Pending"
+import Pending from "./Pending";
 import Completed from "./Completed";
 import Work from "./Work";
 import Personal from "./Peronal";
 
-function Fields() {
+function Fields({ tasks }) {
   const [page, setpage] = useState("All");
-
-  function changeComponent(value) {
-    setpage(value);
-  }
 
   let CurrentComponent;
   switch (page) {
     case "All":
-      CurrentComponent = <All />;
+      CurrentComponent = <All tasks={tasks} />;
       break;
     case "Pending":
       CurrentComponent = <Pending />;
@@ -30,27 +26,17 @@ function Fields() {
       CurrentComponent = <Personal />;
       break;
     default:
-      CurrentComponent = <All />;
+      CurrentComponent = <All tasks={tasks} />;
   }
 
   return (
     <div className="container">
       <ul>
-        <li>
-          <button value="All" onClick={(e) => changeComponent(e.target.value)}>All</button>
-        </li>
-        <li>
-          <button value="Pending" onClick={(e) => changeComponent(e.target.value)}>Pending</button>
-        </li>
-        <li>
-          <button value="Completed" onClick={(e) => changeComponent(e.target.value)}>Completed</button>
-        </li>
-        <li>
-          <button value="Work" onClick={(e) => changeComponent(e.target.value)}>Work</button>
-        </li>
-        <li>
-          <button value="Personal" onClick={(e) => changeComponent(e.target.value)}>Personal</button>
-        </li>
+        <li><button onClick={() => setpage("All")}>All</button></li>
+        <li><button onClick={() => setpage("Pending")}>Pending</button></li>
+        <li><button onClick={() => setpage("Completed")}>Completed</button></li>
+        <li><button onClick={() => setpage("Work")}>Work</button></li>
+        <li><button onClick={() => setpage("Personal")}>Personal</button></li>
       </ul>
       <div>{CurrentComponent}</div>
     </div>
