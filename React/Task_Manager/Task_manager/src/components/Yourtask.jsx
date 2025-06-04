@@ -2,14 +2,14 @@ import { Trash2 } from 'lucide-react';
 function YourTask(props) {
   if (props.tasks.length === 0) {
       return (
-      <div className="text-center py-8 text-gray-500">
+      <div className="text-center py-8 text-gray-500 bg-white-50 p-6 rounded-lg border border-gray-300 ">
         <p>No tasks found. Add some tasks to get started!</p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-3 ">
+    <div className="space-y-3">
       <h2 className="text-xl font-semibold mb-4 text-gray-800">Your Tasks</h2>
       {props.tasks.map(function (task) {
         return (

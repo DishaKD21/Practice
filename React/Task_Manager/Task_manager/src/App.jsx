@@ -56,7 +56,7 @@ function App() {
   );
 
   return (
-    <div className="max-w-4xl mx-auto pr-6 bg-white min-h-screen">
+    <div className="max-w-2xl mx-auto pr-6 bg-white min-h-screen">
       <h1 className="font-bold text-3xl text-gray-800 text-center m-8">Simple Task Manager</h1>
      <div className="grid gap-8">
       <Add_Task onAddTask={addTask} />
