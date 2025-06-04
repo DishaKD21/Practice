@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Trash2, Plus } from 'lucide-react';
 
 // Component 1: Add New Task
 function Add_Task(props) {
@@ -21,7 +20,7 @@ function Add_Task(props) {
 
   return (
     <div>
-      <h2>Add New Task</h2>
+      <h2 className='text-red-500'>Add New Task</h2>
       <div>
         <input
           type="text"
