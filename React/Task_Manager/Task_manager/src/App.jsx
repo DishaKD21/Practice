@@ -11,6 +11,7 @@ function App() {
     setTasks(function (prevTasks) {
       return [...prevTasks, newTask];
     });
+     setActiveFilter("all");
   }
 
   function toggleTask(taskId) {
