@@ -4,11 +4,11 @@ import Fields from './components/Fields';
 import Yourtask from './components/Yourtask';
 import { Pagination } from '@mantine/core'; 
 import { usePagination } from '@mantine/hooks';
-
+import '@mantine/core/styles.css'; // Import Mantine styles first
 function App() {
   const [tasks, setTasks] = useState([]);
   const [activeFilter, setActiveFilter] = useState('all');
-  const itemsPerPage = 5;
+  const itemsPerPage = 3;
 
   const filteredTasks = getFilteredTasks(); 
   const totalPages = Math.ceil(filteredTasks.length / itemsPerPage);
@@ -56,8 +56,9 @@ function App() {
   );
 
   return (
-    <div>
-      <h1>Simple Task Manager</h1>
+    <div className="max-w-4xl mx-auto pr-6 bg-white min-h-screen">
+      <h1 className="font-bold text-3xl text-gray-800 text-center m-8">Simple Task Manager</h1>
+     <div className="grid gap-8">
       <Add_Task onAddTask={addTask} />
       <Fields
         tasks={tasks}
@@ -70,13 +71,17 @@ function App() {
         onDeleteTask={deleteTask}
       />
       {totalPages > 1 && (
+        <div className="flex justify-center mb-6">
         <Pagination
           total={totalPages}
           value={pagination.active}
           onChange={pagination.setPage}
-          mt="md"
+           color="gray"
+  
         />
+        </div>
       )}
+      </div>
     </div>
   );
 }

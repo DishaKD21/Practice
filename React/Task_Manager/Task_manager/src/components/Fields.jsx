@@ -26,12 +26,16 @@ function Fields(props) {
   ];
 
   return (
-    <div>
+    <div className="flex flex-wrap gap-2 mb-6 border rounded p-4 border-gray-300">
       {filterButtons.map(function(button) {
         return (
           <button
             key={button.key}
             onClick={function () { props.onFilterChange(button.key); }}
+             className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 
+              ${props.activeFilter === button.key
+              ? 'bg-black text-white'
+              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
           >
             {button.label} ({button.count})
           </button>
