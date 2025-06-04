@@ -1,54 +1,59 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import Add_Task from './components/add_task';
 import Fields from './components/Fields';
 import Yourtask from './components/Yourtask';
+import { Pagination } from '@mantine/core'; 
+import { usePagination } from '@mantine/hooks';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [activeFilter, setActiveFilter] = useState('all');
+  const itemsPerPage = 5;
+
+  const filteredTasks = getFilteredTasks(); 
+  const totalPages = Math.ceil(filteredTasks.length / itemsPerPage);
+  const pagination = usePagination({
+    total: totalPages,
+    initialPage: 1,
+  });
 
   function addTask(newTask) {
-    setTasks(function (prevTasks) {
-      return [...prevTasks, newTask];
-    });
-     setActiveFilter("all");
+    setTasks(prevTasks => [...prevTasks, newTask]);
+    setActiveFilter('all');
   }
 
   function toggleTask(taskId) {
-    setTasks(function (prevTasks) {
-      return prevTasks.map(function (task) {
-        if (task.id === taskId) {
-          return { ...task, completed: !task.completed };
-        }
-        return task;
-      });
-    });
+    setTasks(prevTasks =>
+      prevTasks.map(task =>
+        task.id === taskId ? { ...task, completed: !task.completed } : task
+      )
+    );
   }
 
   function deleteTask(taskId) {
-    setTasks(function (prevTasks) {
-      return prevTasks.filter(function (task) {
-        return task.id !== taskId;
-      });
-    });
+    setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
   }
 
   function getFilteredTasks() {
     switch (activeFilter) {
       case 'pending':
-        return tasks.filter(function (task) { return !task.completed; });
+        return tasks.filter(task => !task.completed);
       case 'completed':
-        return tasks.filter(function (task) { return task.completed; });
+        return tasks.filter(task => task.completed);
       case 'work':
-        return tasks.filter(function (task) { return task.category === 'Work'; });
+        return tasks.filter(task => task.category === 'Work');
       case 'personal':
-        return tasks.filter(function (task) { return task.category === 'Personal'; });
+        return tasks.filter(task => task.category === 'Personal');
       default:
         return tasks;
     }
   }
 
-  const filteredTasks = getFilteredTasks();
+  
+  const paginatedTasks = filteredTasks.slice(
+    (pagination.active - 1) * itemsPerPage,
+    pagination.active * itemsPerPage
+  );
 
   return (
     <div>
@@ -60,11 +65,20 @@ function App() {
         onFilterChange={setActiveFilter}
       />
       <Yourtask
-        tasks={filteredTasks}
+        tasks={paginatedTasks} 
         onToggleTask={toggleTask}
         onDeleteTask={deleteTask}
       />
+      {totalPages > 1 && (
+        <Pagination
+          total={totalPages}
+          value={pagination.active}
+          onChange={pagination.setPage}
+          mt="md"
+        />
+      )}
     </div>
   );
 }
+
 export default App;
