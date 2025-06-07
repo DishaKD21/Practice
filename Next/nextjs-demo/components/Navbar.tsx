@@ -12,7 +12,7 @@ export default function Navbar(){
                 <Link href="/products_nested">dynamic-nested</Link>
                 <Link href="/">all_Segments_optional</Link>
                 <Link href="/">Nested_notfound</Link>
-                <Link href="/">Error</Link>
+                <Link href="/queryParams">queryParams</Link>
                 <Link href="/">Parallel</Link>
                 <Link href="/">Parallel_defaults</Link>
                 <Link href="/">Intercept_routes</Link>
