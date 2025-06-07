@@ -8,7 +8,7 @@ export default function Navbar(){
                 <Link href="/home">Home</Link>
                 <Link href="/about">About</Link>
                 <Link href="/parent/nested">nested</Link>
-                <Link href="/">dynamic</Link>
+                <Link href="/products">dynamic</Link>
                 <Link href="/">dynamic nested</Link>
                 <Link href="/">all_Segments_optional</Link>
                 <Link href="/">Nested_notfound</Link>
