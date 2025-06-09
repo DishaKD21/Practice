@@ -1,0 +1,9 @@
+| Feature              | JavaScript            | TypeScript                                                                                       |
+| -------------------- | --------------------- | ------------------------------------------------------------------------------------------------ |
+| Variable Declaration | `var`, `let`, `const` | Same as JavaScript, but with type annotation support                                             |
+| Functions            | No type annotations   | Function parameters and return types can be typed                                                |
+| Classes              | ES6 classes           | Same, but supports interfaces, access modifiers (public/private/protected), and abstract classes |
+| Interfaces           | Not supported         | Supported to define contracts for objects or classes                                             |
+| Enums                | Not supported         | Supported                                                                                        |
+| Generics             | Not supported         | Supported                                                                                        |
+| Modules              | ES6 modules           | Same as JavaScript, with added type support                                                      |
