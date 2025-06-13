@@ -1,8 +1,11 @@
+import UseGSAP from "./components/UseGSAP";
+import UseRef from "./components/UseRef";
 function App() {
   return (
     <>
-    hii
+    <UseGSAP/>
+    <UseRef/>
     </>
   )
 }
-export default App
+export default App;
