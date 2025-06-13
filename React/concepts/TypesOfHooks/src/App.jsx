@@ -7,6 +7,11 @@ import Home from './components/Home';
 import About from './components/About';
 import Dashboard from './components/Dashboard';
 import Navbar from './components/Navbar';
+import ParamComp from './components/ParamComp';
+import Courses from './components/Courses';
+import MockTest from './components/MockTest';
+import Reports from './components/Reports';
+import Notfound from './components/Notfound';
 const router = createBrowserRouter(
   [
     {
@@ -21,7 +26,30 @@ const router = createBrowserRouter(
 
     {
      path: "/dashboard",
-     element : <div><Navbar/><Dashboard/></div>
+     element : <div><Navbar/><Dashboard/></div>,
+     children:[
+      {
+        path:'courses',
+        element:<Courses/>
+      },
+      {
+        path:'mock-tests',
+        element:<MockTest/>
+      },
+      {
+        path:'reports',
+        element:<Reports/>
+      }
+
+     ]
+    },
+    {
+     path:"/student/:id",
+     element: <div><Navbar/><ParamComp/></div>,
+    },
+    {
+      path:'*',
+      element:  <div><Notfound/></div>
     }
   ]
 );
@@ -30,9 +58,9 @@ function App() {
     <>
     <UseEffect></UseEffect>
     <LoggerComponent></LoggerComponent>
-    <UseContext></UseContext>
+    <UseContext></UseContext>   
     < RouterProvider router={router} />
- 
+
     </>
   )
 }
